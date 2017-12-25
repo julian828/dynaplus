@@ -1,19 +1,26 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
-class User(models.Model):    
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     company = models.CharField(max_length=256, null=True)
     address_street = models.CharField(max_length=256, null=True)
     address_city = models.CharField(max_length=256, null=True)
     address_province = models.CharField(max_length=256, null=True)
     address_country = models.CharField(max_length=256, null=True)
-    user_regid = models.IntegerField(null=True)
+    birthday = models.Datefield(blank=True, null=True)
+    create_date = models.Datefield(blank=True, null=True)
+    
+    def __unicode__(self):
+        return self.user.username
     
     
 class Application(models.Model):    
     source = models.CharField(max_length=256, null=True)
     Authcontent = models.CharField(max_length=256, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    create_date = models.Datefield(blank=True, null=True)
     
 class Configuration(models.Model):    
     type = models.CharField(max_length=50, null=True)
@@ -21,8 +28,9 @@ class Configuration(models.Model):
     actualnum = models.IntegerField(null=True)
     prefix = models.CharField(max_length=256, null=True)
     suffix = models.CharField(max_length=256, null=True)
-    pstartdate = models.DateField
-    penddate = models.DateField
-    targetdate = models.DateField
+    pstartdate = models.DateField(blank=True, null=True)
+    penddate = models.DateField(blank=True, null=True)
+    targetdate = models.DateField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     application = models.ForeignKey(Application, on_delete=models.CASCADE, null=True)
+    create_date = models.Datefield(blank=True, null=True)
