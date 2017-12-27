@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from .forms import UserRegForm
+from .forms import UserRegForm, UserLoginForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from .models import Profile
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.models import User as Member
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 def account_register(request):
@@ -23,7 +25,7 @@ def account_register(request):
             
             messages.add_message(request, messages.SUCCESS, u'Register Successfully!')
             
-            return HttpResponseRedirect(reverse('accountregister'))
+            return HttpResponseRedirect(reverse('account_register'))
             #return HttpResponseRedirect('/dynatag/account/register/')
         
     else:
@@ -33,10 +35,34 @@ def account_register(request):
         
     return render(request, 'register.html', {'regform': user_form})
 
-def account_info(request):
+def account_profile(request):
     
     return "I am account Info"
 
 def account_edit(request):
     
     return "I am Account Edit"
+
+def account_login(request):
+    
+    if request.method == 'POST':
+    
+        m = Member.objects.get(email=request.POST['email'])
+    
+        if check_password(request.POST['password'], m.password):
+        
+            request.session['member_id'] = m.id
+        
+            return HttpResponse('You are logged in!')
+    
+        else:
+        
+            return HttpResponse('Your email or password is not correct!')
+
+    else:
+        
+        user_form = UserLoginForm()
+        
+    return render(request, 'login.html', {'loginform': user_form})   
+        
+        

@@ -23,3 +23,12 @@ class UserRegForm(forms.ModelForm):
             raise forms.validationError(u'Password Incorrect!')
         
         return cd['password2']
+    
+class UserLoginForm(forms.ModelForm):
+    
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    
+    class Meta:
+        
+        model = User
+        fields = ('email',)
