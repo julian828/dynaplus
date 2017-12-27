@@ -1,0 +1,36 @@
+{% extends "account_base.html" %}
+{% block title %} User Registration {% endblock %}
+{% block content %}
+	<div id="container" >
+	
+		<div id="loginform">
+		
+			{% if loginform.errors %}
+			
+				<p id="erroralarm">
+				
+					Please correct the error {{loginform.errors|pluralize}} below!
+				
+				</p>
+			
+			{% endif %}
+			
+			<form action="" method="post">
+			
+				<table >
+				
+					{{loginform.as_table}}
+					{% csrf_token %}
+				
+				</table>
+				<input type="submit" name="login" value="login">
+			
+			</form>
+		
+		</div>
+		
+		<div id="protocoldiv" style="display:none"></div>
+		<div id="logoimg" ></div>
+	
+	</div>
+{% endblock %}
