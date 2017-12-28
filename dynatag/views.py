@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User as Member
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def account_register(request):
@@ -48,10 +49,12 @@ def account_login(request):
     if request.method == 'POST':
     
         m = Member.objects.get(email=request.POST['email'])
+        #m = authenticate(email=request.POST['email'], password=make_password(request.POST['password']))
     
         if check_password(request.POST['password'], m.password):
         
             request.session['member_id'] = m.id
+            request.session['is_login'] = True
         
             return HttpResponse('You are logged in!')
     
@@ -64,5 +67,15 @@ def account_login(request):
         user_form = UserLoginForm()
         
     return render(request, 'login.html', {'loginform': user_form})   
+
+def account_logout(request):
+    
+    try:
         
+        del request.session['member_id']
         
+    except KeyError:
+        
+        pass
+    
+    return HttpResponse('You are logged out!')    

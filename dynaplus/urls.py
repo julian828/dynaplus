@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from dyanplus import views as dynaplus_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('dynatag.urls')),
+    #path('', dynaplus_views.index)
 ]
