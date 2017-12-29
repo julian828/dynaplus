@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def index(request):
     
-    return HttpResponse('This is the index page!!')
+    return render(request, 'index.html') #HttpResponse('This is the index page!!')
 
 def account_register(request):
     
