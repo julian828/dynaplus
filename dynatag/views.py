@@ -9,73 +9,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
-def account_register(request):
-    
-    if request.method == 'POST':
-        
-        #return HttpResponse("I am Register post!")
-        user_form = UserRegForm(request.POST)
-        
-        if user_form.is_valid():
-            
-            new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.save()
-            
-            profile = Profile.objects.create(user=new_user)
-            
-            messages.add_message(request, messages.SUCCESS, u'Register Successfully!')
-            
-            return HttpResponseRedirect(reverse('account_register'))
-            #return HttpResponseRedirect('/dynatag/account/register/')
-        
-    else:
-        
-        #return HttpResponse("I am Register get!")
-        user_form = UserRegForm()
-        
-    return render(request, 'register.html', {'regform': user_form})
 
-def account_profile(request):
+def main(request):
     
-    return "I am account Info"
-
-def account_edit(request):
-    
-    return "I am Account Edit"
-
-def account_login(request):
-    
-    if request.method == 'POST':
-    
-        m = Member.objects.get(email=request.POST['email'])
-        #m = authenticate(email=request.POST['email'], password=make_password(request.POST['password']))
-    
-        if check_password(request.POST['password'], m.password):
-        
-            request.session['member_id'] = m.id
-            request.session['is_login'] = True
-        
-            return HttpResponse('You are logged in!')
-    
-        else:
-        
-            return HttpResponse('Your email or password is not correct!')
-
-    else:
-        
-        user_form = UserLoginForm()
-        
-    return render(request, 'login.html', {'loginform': user_form})   
-
-def account_logout(request):
-    
-    try:
-        
-        del request.session['member_id']
-        
-    except KeyError:
-        
-        pass
-    
-    return HttpResponse('You are logged out!')    
+    return render(request, 'main.html')

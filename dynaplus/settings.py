@@ -135,6 +135,7 @@ STATICFILES_DIRS = (
     ("css", os.path.join(STATIC_ROOT,'css')),
     ("js", os.path.join(STATIC_ROOT,'js')),
     ("images", os.path.join(STATIC_ROOT,'images')),
+    ("fonts", os.path.join(STATIC_ROOT,'fonts')),
     #os.path.join(BASE_DIR, "common_static"),
     #'/path/to/others/static/',  
 )

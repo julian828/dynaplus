@@ -26,7 +26,8 @@ class UserRegForm(forms.ModelForm):
     
 class UserLoginForm(forms.ModelForm):
     
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput) #(attrs={'class': 'sr-only'}))
+    #email = forms.CharField(label='Email Address', widget=forms.EmailField) #(attrs={'class': 'form-control'}))
     
     class Meta:
         

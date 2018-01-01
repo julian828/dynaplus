@@ -1,9 +1,9 @@
-{% extends "account_base.html" %}
-{% block title %} User Registration {% endblock %}
+{% extends "includes/account_base.html" %}
+{% block title %} User Login {% endblock %}
 {% block content %}
 	<div id="container" >
 	
-		<div id="loginform">
+		<div class="container">
 		
 			{% if loginform.errors %}
 			
@@ -15,7 +15,8 @@
 			
 			{% endif %}
 			
-			<form action="" method="post">
+			<form action="" method="post" class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
 			
 				<table >
 				
