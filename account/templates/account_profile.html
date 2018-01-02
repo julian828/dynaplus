@@ -1,0 +1,30 @@
+{% extends "includes/account_base.html" %}
+{% block title %} User Profile {% endblock %}
+{% block content %}
+	
+		
+		<div class="container">
+		
+			{% if loginform.errors %}
+			
+				<p id="erroralarm">
+				
+					Please correct the error {{loginform.errors|pluralize}} below!
+				
+				</p>
+			
+			{% endif %}
+			
+			<div>
+				Username: {{memberdata.username}}
+				</br>
+				Email: {{memberdata.email}}
+			</div>
+		
+		</div>
+		
+		<div id="protocoldiv" style="display:none"></div>
+		<div id="logoimg" ></div>
+	
+	
+{% endblock %}

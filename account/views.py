@@ -60,7 +60,10 @@ def account_login(request):
             request.session['member_id'] = m.id
             request.session['is_login'] = True
         
-            return HttpResponse('You are logged in!')
+            #return vars(m)
+            #return HttpResponse(vars(m))
+            memberdata = {'username': m.username, 'email': m.email}
+            return render(request, 'account_profile.html', {'memberdata': memberdata})
     
         else:
         
