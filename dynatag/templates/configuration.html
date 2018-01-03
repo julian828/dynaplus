@@ -1,0 +1,27 @@
+{% extends "includes/dynatag_base.html" %}
+{% block title %} Configuration {% endblock %}
+{% block content %}
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Configuration</h1>
+
+          {% if messages %}
+        	<ul class="messages">
+            	{% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="#" class="close">×</a>
+                </li>
+            	{% endfor %}
+        	</ul>
+    		{% endif %}
+    
+    		
+          
+        </div>
+	
+	<div id="container" >
+	
+		Dynatag Main Page!
+	
+	</div>
+{% endblock %}

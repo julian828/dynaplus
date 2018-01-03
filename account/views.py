@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import UserRegForm, UserLoginForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from .models import Profile
@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User as Member
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
+from dynatag import urls
 
 # Create your views here.
 def index(request):
@@ -62,8 +63,9 @@ def account_login(request):
         
             #return vars(m)
             #return HttpResponse(vars(m))
-            memberdata = {'username': m.username, 'email': m.email}
-            return render(request, 'account_profile.html', {'memberdata': memberdata})
+            #memberdata = {'username': m.username, 'email': m.email}
+            #return render(request, 'account_profile.html', {'memberdata': memberdata})
+            return redirect(reverse('dynatag_main'))
     
         else:
         
