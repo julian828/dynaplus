@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     
     'dynatag',
     'account',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,21 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-
+REST_FRAMEWORK = {
+    
+    'DEFAULT_PERMISSION_CLASSES' : (
+        
+        'rest_framework.permissions.AllowAny',
+                
+        ),
+    
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE':10,
+    }
 
 
