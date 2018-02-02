@@ -14,15 +14,19 @@ class Userapp(models.Model):
 '''
 
 class Application(models.Model):
-    user = models.IntegerField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     appname = models.CharField(max_length=256, null=True)
     description = models.CharField(max_length=256, null=True)
     apptoken =  models.CharField(max_length=256, null=True)
     tokenrefresh_time = models.DateTimeField(blank=True, null=True)
     appuri = models.CharField(max_length=256, null=True)
-    create_date = models.DateTimeField(blank=True, null=True)   
+    create_date = models.DateTimeField(blank=True, null=True)  
+    
+    def __unicode__(self):
+        return self.appname 
      
 class Configuration(models.Model):    
+    confname = models.CharField(max_length=50, null=True)
     type = models.CharField(max_length=50, null=True)
     initalnum = models.IntegerField(null=True)
     actualnum = models.IntegerField(null=True)
@@ -34,6 +38,9 @@ class Configuration(models.Model):
     #user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     application = models.ForeignKey(Application, on_delete=models.CASCADE, null=True)
     create_date = models.DateTimeField(blank=True, null=True)
+    
+    def __unicode__(self):
+        return self.confname
     
 
     

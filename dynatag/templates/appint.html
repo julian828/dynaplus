@@ -1,8 +1,9 @@
 {% extends "includes/dynatag_base.html" %}
 {% block title %} Configuration {% endblock %}
 {% block content %}
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Application Integration</h1>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-app="myapp" ng-controller="myctl">
+	
+     <h1 class="page-header">Application</h1>
 
           {% if messages %}
         	<ul class="messages">
@@ -16,12 +17,49 @@
     		{% endif %}
     
     		
-          
-        </div>
+    <form class="form-inline">
+    	<div class="form-group">
+    		<label>Start Date</label>
+    		<input type="date" class="form-control" ng-model="startdate">
+    	</div>
+    	<div class="form-group">
+    		<label>End Date</label>
+    		<input type="date" class="form-control" ng-model="enddate">
+    	</div>
+    	<button class="btn btn-default" ng-click="query()">QUERY</button>
+    
+    </form>    
+    {% verbatim %}
+    
+    	your input: {{period}}
+    
+    {% endverbatim %}  
+    
+    <h2 class="sub-header"></h2>
+	<h2 class="sub-header">Section title</h2>
 	
-	<div id="container" >
-	
-		Dynatag Main Page!
-	
-	</div>
+	<div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1,001</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                </tr>
+              </tbody>
+            </table>
+            
+     </div>
+</div>
 {% endblock %}
