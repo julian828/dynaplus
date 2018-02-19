@@ -2,7 +2,7 @@ from __future__ import  unicode_literals, absolute_import
 from django.shortcuts import render
 from .forms import UserRegForm, UserLoginForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from .models import Application, Configuration
+from .models import Application, Configuration, Masterdata
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -28,9 +28,52 @@ def main(request):
 
 def appint(request):
     
-    return render(request, 'appint.html')
+    myappinfo = Masterdata.objects.get(status='active')
+    content = {}
+    content['clientid'] = myappinfo.clientid
+    content['redirecturl'] = myappinfo.redirecturl
+    content['responsetype'] = myappinfo.responsetype
+    
+    return render(request, 'appint.html', content)
+
+def appint_add(request):
+    
+    content = {}
+    c_code = content['code'] = request.GET.get('code')
+    c_scope = content['scope'] = request.GET.get('scope').split('|')[0]
+    c_appname = content['appname'] = request.GET.get('scope').split('|')[1]
+    content['state'] = request.GET.get('state')
+    
+    try:
+        u_user = User.objects.get(username = 'test')
+    except Application.DoesNotExist:
+        u_user = None
+    
+    try:
+        u_app = Application.objects.get(appname = c_appname, status = 'active', user=u_user)
+    except Application.DoesNotExist:
+        u_app = None
+    
+    if u_app:
+        
+        u_app.code = c_code
+        u_app.scope = c_scope
+        u_app.save()
+        
+    else:
+        u_app = Application.objects.create()
+        u_app.user = u_user
+        u_app.appname = c_appname
+        u_app.code = c_code
+        u_app.scope = c_scope
+        u_app.save()
+    
+    
+    return render(request, 'appint.html', content)
 
 def configuration(request):
+    
+    
     
     return render(request, 'configuration.html')
 

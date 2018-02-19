@@ -32,7 +32,14 @@
     {% verbatim %}
     
     	your input: {{period}}
-    
+    	{{configurations}}
+    	<ul>
+		  <li ng-repeat="x in configurations">
+		    {{ x.application}}{{x.confname }}
+		  </li>
+		</ul>
+		{{error}}
+		    
     {% endverbatim %}  
     
     <h2 class="sub-header"></h2>
@@ -49,8 +56,9 @@
                   <th>Header</th>
                 </tr>
               </thead>
+              {% verbatim %}
               <tbody>
-                <tr>
+                <tr ng-repeat="x in configurations">
                   <td>1,001</td>
                   <td>Lorem</td>
                   <td>ipsum</td>
@@ -58,6 +66,7 @@
                   <td>sit</td>
                 </tr>
               </tbody>
+              {% endverbatim %}
             </table>
             
      </div>

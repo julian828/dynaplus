@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         
     class Meta:
         model = User
-        fields = ('username', 'email', 'groups')
+        fields = ('id', 'username', 'email', 'groups')
 
 '''
 class UserappSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,13 +25,13 @@ class ApplicationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Application
-        fields = ('appname', 'description', 'apptoken', 'tokenrefresh_time', 'appuri', 'user', 'create_date')
+        fields = ('id', 'appname', 'description', 'apptoken', 'tokenrefresh_time', 'appuri', 'user', 'create_date')
            
 class ConfigurationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Configuration
-        fields = ('confname','type', 'initalnum', 'actualnum', 'prefix', 'suffix', 'pstartdate', 'penddate', 'targetdate', 'application', 'create_date')
+        fields = ('id', 'confname','type', 'initalnum', 'actualnum', 'prefix', 'suffix', 'pstartdate', 'penddate', 'targetdate', 'application', 'create_date')
 
      
     

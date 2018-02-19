@@ -24,5 +24,6 @@ urlpatterns = [
     path('configuration/', dynatag_views.configuration, name='dynatag_configuration'),
     path('api/', include(router.urls)),
     #path('api/', include('rest_framework.urls', namespace='rest_framework')),
+    path('appint/add/', dynatag_views.appint_add, name='dynatag_appint_add'),
     
     ]
