@@ -37,9 +37,10 @@ app.controller('appctl', function($scope, $window){
 		
 		url = 'https://signin.infusionsoft.com/app/oauth/authorize';
 		url = url + '?client_id=' + $scope.client_id;
-		url = url + '&redirect_url=' + $scope.redirect_url;
+		url = url + '&redirect_uri=' + $scope.redirect_url;
 		url = url + '&response_type=' + $scope.response_type;
-		console.log(decodeURI('https://mytest.com/abc?code=vtu7ckj73e7muhnat9zebafd&scope=full%7Caa331.infusionsoft.com&state='));
+		url = url + '&scope=full';
+		//console.log(decodeURI('https://mytest.com/abc?code=vtu7ckj73e7muhnat9zebafd&scope=full%7Caa331.infusionsoft.com&state='));
 		
 		$window.open(encodeURI(url), "popup", "width=500,height=500,left=10,top=150");
 		
