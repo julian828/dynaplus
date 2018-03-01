@@ -19,6 +19,7 @@ from .serializers import UserSerializer, ConfigurationSerializer, ApplicationSer
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+import requests
 
 # Create your views here.
 
@@ -90,8 +91,8 @@ def appint_add(request):
         
         }
     
-    request = Request(s_url, urlencode(post_field).encode())
-    result = urlopen(request).read().decode()
+    result = requests.post(s_url, post_field)
+    #result = urlopen(request).read().decode()
     
     return HttpResponse(result)
 
