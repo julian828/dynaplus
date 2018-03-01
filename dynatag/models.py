@@ -30,6 +30,7 @@ class Application(models.Model):
     tokenrefresh_time = models.DateTimeField(blank=True, null=True)
     appuri = models.CharField(max_length=256, null=True)
     status = models.CharField(max_length=256, null=True)
+    errormessage = models.CharField(max_length=256, null=True)
     create_date = models.DateTimeField(blank=True, null=True)  
     
     def __unicode__(self):

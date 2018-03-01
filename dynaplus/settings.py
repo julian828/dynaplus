@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import tornado_websockets
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'dynatag',
     'account',
     'rest_framework',
+    'tornado_websockets',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +163,18 @@ REST_FRAMEWORK = {
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE':10,
+    }
+
+TORNADO = {
+    
+    'port': 443,
+    'handlers': [
+        
+        tornado_websockets.django_app(),
+        
+        ],
+    'settings': {},
+    
     }
 
 

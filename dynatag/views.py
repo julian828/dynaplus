@@ -17,6 +17,9 @@ from rest_framework.decorators import ( permission_classes, detail_route)
 from rest_framework.response import Response as Restresponse
 from .serializers import UserSerializer, ConfigurationSerializer, ApplicationSerializer
 
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+
 # Create your views here.
 
 
@@ -68,8 +71,29 @@ def appint_add(request):
         u_app.scope = c_scope
         u_app.save()
     
+    #send post request to get access token
+    myappinfo = Masterdata.objects.get(status='active')
+    s_url = 'https://api.infusionsoft.com/token'
     
-    return render(request, 'appint.html', content)
+    s_client_id = myappinfo.clientid
+    s_client_secret = myappinfo.clientsecret
+    s_code = c_code
+    s_grant_type = 'authorization_code'
+    s_redirect_uri = myappinfo.redirecturl + 'gettoken/'
+    post_field = {
+        
+        'client_id': s_client_id,
+        'client_secret': s_client_secret,
+        'code': s_code,
+        'grant_type': s_grant_type,
+        'redirect_uri': s_redirect_uri, 
+        
+        }
+    
+    request = Request(s_url, urlencode(post_field).encode())
+    result = urlopen(request).read().decode()
+    
+    return HttpResponse(result)
 
 def configuration(request):
     
